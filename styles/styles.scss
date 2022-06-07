@@ -1,0 +1,42 @@
+$background-color: white;
+$primary-color: #4D7EF6;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.landing {
+    background-color: $background-color;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    .icon {
+        margin: 4px;
+    }
+}
+
+.landing-left {
+    min-height: 100vh;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-right {
+    background-color: #EBBC56;
+    min-height: 100vh;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.primary-button {
+    background-color: $primary-color;
+    color: white;
+    padding: 15px 45px 15px 45px;
+    border-radius: 50px;
+    border: none;
+}
