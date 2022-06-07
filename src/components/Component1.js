@@ -6,7 +6,7 @@ export default function Component1() {
             </div>
 
             <div className="test">
-                This is a new component.
+                This is a new component. How are you?
             </div>
         </>
     )
