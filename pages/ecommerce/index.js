@@ -63,7 +63,7 @@ export default function Ecommerce(props) {
 
 // build time
 export async function getStaticProps() {
-    const res = await axios.get('http://localhost:3000/api/products') 
+    const res = await axios.get('/api/products') 
     return {
         props: {
             data: res.data
