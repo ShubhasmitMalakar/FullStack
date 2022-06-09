@@ -1,10 +1,18 @@
 const next = require("next");
 const express = require("express");
-const axios = require("axios")
+const mongoose = require("mongoose");
+const passport = require("passport");
+const cookieSession = require("cookie-session");
 
 const bodyParser = require("body-parser");
 
+const keys = require("./api/config/keys");
+
 const dev = process.env.NODE_ENV !== "production";
+
+//==== IMPORT MODELS ====
+require("./api/models/Products");
+require("./api/models/Users");
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -16,11 +24,25 @@ app
 
     server.use(bodyParser.json());
 
-    server.get('/api/products', async (req,res) => {
-        const response = await axios.get('https://dummyjson.com/products');
+    require("./api/routes/productRoutes")(server);
+    require("./api/routes/authRoutes")(server);
 
-        return res.send(response.data)
-    })
+    mongoose.connect(keys.mongoURI, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    });
+
+    server.use(
+      cookieSession({
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+          keys: [keys.cookieKey],
+      })
+    );
+
+    require("./api/services/passport");
+
+    server.use(passport.initialize());
+    server.use(passport.session());
 
     server.get("*", (req, res) => {
       return handle(req, res);

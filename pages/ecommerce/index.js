@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-import Product from '../src/components/Product'
+import Product from '../../src/components/Product'
 
-export default function Page3(props) {
+
+
+export default function Ecommerce(props) {
     const data = props.data
 
     // const [data, setData] = useState([])
@@ -31,7 +33,7 @@ export default function Page3(props) {
 
     return (
         <>
-            <h1>Page 3</h1>
+            <center><h3>eCommerce Web App</h3></center>
             {/* <button onClick={() => getData()} className="primary-button">
                 Click here
             </button> */}
@@ -61,10 +63,7 @@ export default function Page3(props) {
 
 // build time
 export async function getStaticProps() {
-console.log("1")
-    const res = await axios.get('http://localhost:3000/api/products')
-console.log("2")
- 
+    const res = await axios.get('http://localhost:3000/api/products') 
     return {
         props: {
             data: res.data

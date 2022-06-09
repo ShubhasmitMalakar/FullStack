@@ -12,6 +12,8 @@
 /.next/
 /out/
 
+/api/config/dev.js
+
 # production
 /build
 
