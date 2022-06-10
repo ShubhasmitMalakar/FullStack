@@ -8,10 +8,10 @@ module.exports = (router) => {
   // =======================
   // ==== GET CART DATA ====
   // =======================
-  router.get("/api/cart", async (req, res) => {
+  router.get("/api/carts", async (req, res) => {
     console.log("=== GET CART DATA ===\n Date: ", new Date());
     try {
-      const cartData = await Cart.find().populate("products._productId");
+      const cartData = await Cart.findOne().populate("products._productId");
       return res.json(cartData);
     } catch (err) {
       console.log("=== ERROR  GET CART DATA ====\n", err.message);

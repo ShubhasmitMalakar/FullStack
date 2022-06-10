@@ -29,9 +29,9 @@ module.exports = (router) => {
   // =======================
   // ==== ADD NEW ORDER ====
   // =======================
-  router.post("/api/add/order", async (req, res) => {
+  router.get("/api/add/order", async (req, res) => {
     console.log("=== ADD ORDERS ===\n Date: ", new Date());
-    const { cartId } = req.body;
+    // const { cartId } = req.body;
     const sum = (previous, current) => previous + current.price;
     try {
       const cartData = await Cart.findOne().populate("products._productId");
@@ -70,7 +70,10 @@ module.exports = (router) => {
           { new: true }
         );
         console.log(finalOrder);
-        return res.status(200).json({ orderId: finalOrder.orderId });
+        return res.status(200).json({
+          orderId: finalOrder.orderId,
+          totalPrice: finalOrder.totalPrice,
+        });
       });
     } catch (err) {
       console.log("=== ERROR  ADD ORDERS ====\n", err.message);
