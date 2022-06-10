@@ -54,20 +54,20 @@ export default function Ecommerce(props) {
 }
 
 // dynamically get data from the server
-// export async function getServerSideProps() {
-//     const res = await axios.get('http://localhost:3000/api/products')
-//     return {
-//         props: {data: res.data},
-//     }
-// }
-
-// build time
-export async function getStaticProps() {
-    const res = await axios.get(keys.redirectDomain + '/api/products') 
+export async function getServerSideProps() {
+    const res = await axios.get(keys.redirectDomain + '/api/products')
     return {
-        props: {
-            data: res.data
-        },
-        revalidate: 10 // page re-renders in the server and updates the web page if there is new data
+        props: {data: res.data},
     }
 }
+
+// build time
+// export async function getStaticProps() {
+//     const res = await axios.get('/api/products') 
+//     return {
+//         props: {
+//             data: res.data
+//         },
+//         revalidate: 10 // page re-renders in the server and updates the web page if there is new data
+//     }
+// }

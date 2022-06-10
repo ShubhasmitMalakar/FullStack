@@ -49,7 +49,7 @@ app
     server.get("*", (req, res) => {
       return handle(req, res);
     });
-    server.listen(3000, (err) => {
+    server.listen(process.env.port || 3000, (err) => {
       if (err) throw err;
       console.log("server ready!!!");
     });
