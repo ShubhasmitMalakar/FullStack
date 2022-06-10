@@ -18,7 +18,7 @@ export default function Product({product}) {
 
 export async function getStaticPaths() {
     const res = await axios.get(keys.redirectDomain + '/api/products')
-    const products = await res.json()
+    const products = await res.data
   
     const paths = 
     products.map((product) => ({
@@ -30,7 +30,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const res = await axios.get(keys.redirectDomain + '/api/product/' + params.product)
-    const product = await res.json()
+    const product = await res.data
     return {
         props: {product},
         // revalidate: 10 // page re-renders in the server and updates the web page if there is new data
