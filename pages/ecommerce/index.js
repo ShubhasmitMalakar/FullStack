@@ -7,6 +7,7 @@ import keys from '../../api/config/keys'
 
 export default function Ecommerce(props) {
     const data = props.data
+    
 
     // const [data, setData] = useState([])
     // const [data2, setData2] = useState([])
