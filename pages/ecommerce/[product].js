@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useRouter } from "next/router"
 
 import keys from "../../api/config/keys"
@@ -16,7 +17,7 @@ export default function Product({product}) {
 }
 
 export async function getStaticPaths() {
-    const res = await fetch(keys.redirectDomain + '/api/products')
+    const res = await axios.get(keys.redirectDomain + '/api/products')
     const products = await res.json()
   
     const paths = 
@@ -28,7 +29,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(keys.redirectDomain + '/api/product/' + params.product)
+    const res = await axios.get(keys.redirectDomain + '/api/product/' + params.product)
     const product = await res.json()
     return {
         props: {product},
