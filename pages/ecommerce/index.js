@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 
 import Product from '../../src/components/Product'
-
+import keys from '../../api/config/keys'
 
 
 export default function Ecommerce(props) {
@@ -63,7 +63,7 @@ export default function Ecommerce(props) {
 
 // build time
 export async function getStaticProps() {
-    const res = await axios.get('http://localhost:3000/api/products') 
+    const res = await axios.get(keys.redirectDomain + '/api/products') 
     return {
         props: {
             data: res.data
