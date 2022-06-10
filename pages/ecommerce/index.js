@@ -1,47 +1,62 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
-import Product from '../../src/components/Product'
-import keys from '../../api/config/keys'
-
+import Product from "../../src/components/Product";
+import keys from "../../api/config/keys";
 
 export default function Ecommerce(props) {
-    const data = props.data
-    
+  const data = props.data;
+  const router = useRouter();
 
-    // const [data, setData] = useState([])
-    // const [data2, setData2] = useState([])
+  const isLoggedIn = async () => {
+    console.log("==== CHECK LOGIN ====");
 
-    // async function getData() {
-    //     const res = await axios.get('https://dummyjson.com/products')
-    //     // console.log(res.data)
-    //     data2.length != 0 ? setData(res.data) : null
-    // }
+    const res = await axios.get(keys.redirectDomain + "/api/current_user");
+    console.log(res.data);
+    if (res.data == "") {
+      router.push("/auth/google");
+    }
+  };
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
 
-    // async function getData2() {
-    //     const res = await axios.get('https://dummyjson.com/comments')
-    //     // console.log(res.data)
-    //     setData2(res.data)
-    // }
+  // const [data, setData] = useState([])
+  // const [data2, setData2] = useState([])
 
-    // useEffect(() => {
-    //     getData()
-    // }, [data2])
+  // async function getData() {
+  //     const res = await axios.get('https://dummyjson.com/products')
+  //     // console.log(res.data)
+  //     data2.length != 0 ? setData(res.data) : null
+  // }
 
-    // useEffect(() => {
-    //     getData2()
-    // }, [])
+  // async function getData2() {
+  //     const res = await axios.get('https://dummyjson.com/comments')
+  //     // console.log(res.data)
+  //     setData2(res.data)
+  // }
 
-    return (
-        <>
-            <center><h3>eCommerce Web App</h3></center>
-            {/* <button onClick={() => getData()} className="primary-button">
+  // useEffect(() => {
+  //     getData()
+  // }, [data2])
+
+  // useEffect(() => {
+  //     getData2()
+  // }, [])
+
+  return (
+    <>
+      <center>
+        <h3>eCommerce Web App</h3>
+      </center>
+      {/* <button onClick={() => getData()} className="primary-button">
                 Click here
             </button> */}
 
-            <Product items={data} />
+      <Product items={data} />
 
-            {/* {
+      {/* {
                 data.length !=0 ? data.products.map((item, i) => (
                     <div key={i}>
                         <p>{item.title}</p>
@@ -50,21 +65,21 @@ export default function Ecommerce(props) {
                     </div>
                 )) : null
             } */}
-        </>
-    )
+    </>
+  );
 }
 
 // dynamically get data from the server
 export async function getServerSideProps() {
-    const res = await axios.get(keys.redirectDomain + '/api/products')
-    return {
-        props: {data: res.data},
-    }
+  const res = await axios.get(keys.redirectDomain + "/api/products");
+  return {
+    props: { data: res.data },
+  };
 }
 
 // build time
 // export async function getStaticProps() {
-//     const res = await axios.get('/api/products') 
+//     const res = await axios.get('/api/products')
 //     return {
 //         props: {
 //             data: res.data
