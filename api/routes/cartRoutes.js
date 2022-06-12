@@ -12,6 +12,7 @@ module.exports = (router) => {
     console.log("=== GET CART DATA ===\n Date: ", new Date());
     try {
       const cartData = await Cart.findOne().populate("products._productId");
+      console.log(cartData)
       return res.json(cartData);
     } catch (err) {
       console.log("=== ERROR  GET CART DATA ====\n", err.message);
